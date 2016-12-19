@@ -1,4 +1,9 @@
+package model;
 import java.awt.image.BufferedImage;
+
+import quadDataStructure.QuadTreeNode;
+import quadProcessing.QuadTreeGraphics;
+import quadProcessing.SubDivideImage;
 
 public class ProcessingData {
 
@@ -24,5 +29,13 @@ public class ProcessingData {
 
 	public BufferedImage getImage() {	
 		return output;
+	}
+
+	public int getTotalDivisions() {
+		return divide.returnTotalDivisions();
+	}
+
+	public int getTotalObjects() {
+		return divide.returnTotalObjects();
 	}
 }

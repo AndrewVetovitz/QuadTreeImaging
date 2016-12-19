@@ -1,3 +1,4 @@
+package quadDataStructure;
 import java.awt.image.BufferedImage;
 
 public class QuadTreeNode implements Comparable<QuadTreeNode> {

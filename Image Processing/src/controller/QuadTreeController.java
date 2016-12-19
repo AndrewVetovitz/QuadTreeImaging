@@ -1,3 +1,4 @@
+package controller;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,8 +6,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.swing.JFileChooser;
 import javax.swing.Timer;
+
+import model.QuadTreeModel;
+import view.Gui;
 
 public class QuadTreeController {
 	
@@ -16,7 +19,7 @@ public class QuadTreeController {
 	
 	private Timer timer;
 	
-	//30 updates per second
+	//30 frames per second
 	private int delay = 1000/30;
 	
 	private boolean resume = false;
@@ -36,18 +39,15 @@ public class QuadTreeController {
 				gui.dispose();
 				System.exit(0);
 			}else if(e.getSource() == gui.returnOpen()){
-				JFileChooser fileChooser = new JFileChooser();
-				int value = fileChooser.showOpenDialog(gui);
-				if(value == JFileChooser.APPROVE_OPTION){
-					qModel.setPicture(fileChooser.getSelectedFile());
+				if(qModel.openPicture(gui)){
 					gui.setPicture(qModel.returnPicture());
 					resume = false;
 				}
 			}else if(e.getSource() == gui.returnSave()){
-				
+				qModel.savePicture(gui, qModel.getUpdatedPicture());
 			} else if(e.getSource() == gui.returnInformation()){
 				try {
-					Desktop.getDesktop().browse(new URI("https://github.com/AndrewVetovitz"));
+					Desktop.getDesktop().browse(new URI("https://github.com/AndrewVetovitz/QuadTreeImaging"));
 				} catch (IOException e1) {
 					System.out.println("IO Exception in website input");
 					e1.printStackTrace();
@@ -85,6 +85,8 @@ public class QuadTreeController {
 	      public void actionPerformed(ActionEvent e) {
 				qModel.divideOnce();
 				gui.updatePicture(qModel.getUpdatedPicture());
+				gui.updateDivisions(qModel.getTotalDivisions());
+				gui.updateObjects(qModel.getTotalObjects());
 	      }
 	  };
 }

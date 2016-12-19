@@ -1,3 +1,4 @@
+package quadDataStructure;
 import java.awt.image.BufferedImage;
 
 /**
@@ -72,7 +73,7 @@ public class Quadrant {
 		}
 	}
 	
-	Quadrant(QuadTreeNode data){
+	public Quadrant(QuadTreeNode data){
 		//create new point class of the 4 quadrants
 		this.quadrants = new Point[4];
 		

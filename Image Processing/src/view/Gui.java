@@ -1,3 +1,4 @@
+package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -29,9 +30,9 @@ public class Gui extends JFrame  {
 	
 	private JLabel pic;
 	
-	private JLabel divisions;
-	
 	private JButton start, stop, reset;
+	
+	private JLabel divisions, objects;
 	
 	private JMenuBar menuBar;
 	
@@ -41,7 +42,9 @@ public class Gui extends JFrame  {
 	
 	private BufferedImage origional;
 	
-	Gui(){
+	private int totalDivisions, totalObjects;
+	
+	public Gui(){
 		setUIManager();
 		
 		this.setName("Quad");
@@ -88,9 +91,15 @@ public class Gui extends JFrame  {
 		bottom.add(stop);
 		bottom.add(reset);
 		
-		divisions = new JLabel("Divisions: ");
+		totalDivisions = 0;
+		divisions = new JLabel("Divisions: " + totalDivisions);
 		divisions.setFont(new Font("serif", Font.BOLD, 20));
 		bottom.add(divisions);
+		
+		totalObjects = 0;
+		objects = new JLabel("Objects: " + totalObjects);
+		objects.setFont(new Font("serif", Font.BOLD, 20));
+		bottom.add(objects);
 		
 		bottom.setBackground(Color.WHITE);
 		middle.setBackground(Color.WHITE);
@@ -178,7 +187,7 @@ public class Gui extends JFrame  {
 		this.add(bottom, BorderLayout.SOUTH);
 	}
 
-	void menuListener(ActionListener press){
+	public void menuListener(ActionListener press){
 		//first menu
 		open.addActionListener(press);
 		save.addActionListener(press);
@@ -188,7 +197,7 @@ public class Gui extends JFrame  {
 		information.addActionListener(press);
 	}
 	
-	void ButtonListener(ActionListener press){
+	public void ButtonListener(ActionListener press){
 		start.addActionListener(press);
 		stop.addActionListener(press);
 		reset.addActionListener(press);
@@ -228,6 +237,14 @@ public class Gui extends JFrame  {
 		pic.setIcon(new ImageIcon(updated));
 	}
 	
+	public void updateDivisions(int newDivisions){
+		divisions.setText("Divisions: " + newDivisions);
+	}
+	
+	public void updateObjects(int newObjects){
+		objects.setText("Total Objects: " + newObjects);
+	}
+	
 	public void setPicture(BufferedImage returnPicture) {
 		origional = returnPicture;
 		
@@ -246,6 +263,8 @@ public class Gui extends JFrame  {
 	
 	public void resetPicture(){
 		pic.setIcon(new ImageIcon(origional));
+		divisions.setText("Divisions: " + 0);
+		objects.setText("Objects: " + 0);
 	}
 
 	private void center() {

@@ -1,19 +1,27 @@
+package quadProcessing;
 import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.PriorityQueue;
+
+import quadDataStructure.QuadTreeNode;
+import quadDataStructure.Quadrant;
 
 public class SubDivideImage {
 
 	private QuadTreeNode[] newQuads;
 	
+	private int totalDivisions;
+	
 	private PriorityQueue<QuadTreeNode> toDivide = new PriorityQueue<>(Collections.reverseOrder());
 	
 	public SubDivideImage(BufferedImage image){
 		QuadTreeNode root = new QuadTreeNode(image, 0, 0, 10000);
+		totalDivisions = 0;
 		toDivide.add(root);
 	}
 	
 	public void oneDivision() {
+		totalDivisions++;
 		QuadTreeNode root = toDivide.poll();
 		newQuads = subdivide(root);
 		for(int j = 0; j < newQuads.length; j++){
@@ -60,5 +68,13 @@ public class SubDivideImage {
 	
 	public QuadTreeNode[] returnImageData(){
 		return newQuads;
+	}
+
+	public int returnTotalDivisions() {
+		return totalDivisions;
+	}
+
+	public int returnTotalObjects() {
+		return 1 + 3 * totalDivisions;
 	}	
 }

@@ -1,3 +1,9 @@
+package startProgram;
+
+import controller.QuadTreeController;
+import model.QuadTreeModel;
+import view.Gui;
+
 public class MainQuadTreeProgram {
 	
 	public static void main(String[] args){

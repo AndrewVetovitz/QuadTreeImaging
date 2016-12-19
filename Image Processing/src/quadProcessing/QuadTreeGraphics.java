@@ -1,6 +1,9 @@
+package quadProcessing;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import quadDataStructure.QuadTreeNode;
 
 public class QuadTreeGraphics {
 	
