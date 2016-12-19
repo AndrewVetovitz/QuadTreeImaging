@@ -3,29 +3,18 @@ import java.io.File;
 
 public class QuadTreeModel {
 	
-	private ProcessingData divisions;;
+	private ProcessingData subDivdeImage;
 	
 	private BufferedImage image;
 	
 	QuadTreeModel(){
-//		//processing quadTree
-//		ProcessingData processed = new ProcessingData();
-//				
-//		QuadTreeNode[] tiles = processed.dataToQuadTreeNode(data, divisions);
-//				
-//		QuadTreeGraphics graphics = new QuadTreeGraphics(tiles);
-//				
-//		graphics.setOptionSkeleton(skeleton);
-//		data1 = graphics.drawBufferedImage(data1);
-		
-		//making sure program ran successfully
-		System.out.println("sucess Create Model");
 	}
 	
 	public void setPicture(File picture){		
-		this.image = ImageInputOutput.readImage(picture);
+		image = ImageInputOutput.readImage(picture);
+		subDivdeImage = new ProcessingData(image);
 	}
-	
+
 	public void savePicture(BufferedImage picture, File output){
 		ImageInputOutput.writeImage(picture, output);
 	}
@@ -34,20 +23,15 @@ public class QuadTreeModel {
 		return image;
 	}
 	
-	public void startDivisions()  {
-		divisions = new ProcessingData();
-		divisions.start();
+	public void divideOnce() {
+		subDivdeImage.subdivide();	
+	}
+	
+	public BufferedImage getUpdatedPicture(){
+		return subDivdeImage.getImage();
 	}
 
-	public void stopDivisions() {
-		divisions.stop();
+	public void resetPicture() {
+		subDivdeImage = new ProcessingData(image);
 	}
-	
-	public void resumeDivisions(){
-		divisions.resume();
-	}
-	
-	//BufferedImage divideImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_BGR);		
-	
-
 }

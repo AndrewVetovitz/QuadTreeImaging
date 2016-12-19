@@ -3,43 +3,37 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class QuadTreeGraphics {
-
-	QuadTreeNode[] data;
-	boolean skeleton;
 	
-	public QuadTreeGraphics(QuadTreeNode[] tiles) {
-		this.data = tiles;
+	private boolean skeleton = false;
+	
+	public QuadTreeGraphics() {
 	}
 
-	public BufferedImage drawBufferedImage(BufferedImage data1) {	
+	public BufferedImage drawBufferedImage(QuadTreeNode[] tiles, BufferedImage output) {
 		ColorProcessing average = new ColorProcessing();
 		
-		Graphics g = data1.createGraphics();
+		Graphics g = output.createGraphics();
 		
 		if(this.skeleton){
-			for(QuadTreeNode s : data){
-					Color test = average.AverageColor(s.returnRoot());
+			for(QuadTreeNode tile : tiles){
+					Color test = average.AverageColor(tile.returnRoot());
 					g.setColor(test);
-					g.fillRect(s.returnX(), s.returnY(), s.returnRoot().getWidth() - 1, s.returnRoot().getHeight() - 1);
+					g.fillRect(tile.returnX(), tile.returnY(), 
+							tile.returnRoot().getWidth() - 1, tile.returnRoot().getHeight() - 1);
 			}
 		}else{
-			for(QuadTreeNode s : data){
-				Color test = average.AverageColor(s.returnRoot());
+			for(QuadTreeNode tile : tiles){
+				Color test = average.AverageColor(tile.returnRoot());
 				g.setColor(test);
-				g.fillRect(s.returnX(), s.returnY(), s.returnRoot().getWidth(), s.returnRoot().getHeight());
+				g.fillRect(tile.returnX(), tile.returnY(), 
+						tile.returnRoot().getWidth(), tile.returnRoot().getHeight());
 			}	
 		}
-	
-		
-		return data1;
+
+		return output;
 	}
 
 	public void setOptionSkeleton(boolean skeleton) {
 		this.skeleton = skeleton;
 	}
-	
-	
-//	Graphics g = data1.createGraphics();
-//	
-//	ColorProcessing average = new ColorProcessing();
 }
