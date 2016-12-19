@@ -6,11 +6,20 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.swing.JFileChooser;
+import javax.swing.Timer;
 
 public class QuadTreeController {
-
+	
 	private Gui gui;
+	
 	private QuadTreeModel qModel;
+	
+	private Timer timer;
+	
+	//30 updates per second
+	private int delay = 1000/30;
+	
+	private boolean resume = false;
 	
 	 public QuadTreeController(Gui gui, QuadTreeModel qModel){
 		 this.gui = gui;
@@ -28,12 +37,14 @@ public class QuadTreeController {
 				System.exit(0);
 			}else if(e.getSource() == gui.returnOpen()){
 				JFileChooser fileChooser = new JFileChooser();
-			
 				int value = fileChooser.showOpenDialog(gui);
 				if(value == JFileChooser.APPROVE_OPTION){
 					qModel.setPicture(fileChooser.getSelectedFile());
 					gui.setPicture(qModel.returnPicture());
+					resume = false;
 				}
+			}else if(e.getSource() == gui.returnSave()){
+				
 			} else if(e.getSource() == gui.returnInformation()){
 				try {
 					Desktop.getDesktop().browse(new URI("https://github.com/AndrewVetovitz"));
@@ -52,12 +63,28 @@ public class QuadTreeController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == gui.returnStart()){
-				qModel.startDivisions();
+				if(!resume){
+					resume = true;
+					timer = new Timer(delay, updateFrame);
+					timer.start();
+				} else{
+					timer.start();
+				}
 			} else if(e.getSource() == gui.returnStop()){
-				qModel.stopDivisions();
+				timer.stop();
 			} else if(e.getSource() == gui.returnReset()){
+				timer.stop();
+				qModel.resetPicture();
 				gui.resetPicture();
+				resume = false;
 			}
 		} 
 	 }
+	 
+	  ActionListener updateFrame = new ActionListener() {
+	      public void actionPerformed(ActionEvent e) {
+				qModel.divideOnce();
+				gui.updatePicture(qModel.getUpdatedPicture());
+	      }
+	  };
 }

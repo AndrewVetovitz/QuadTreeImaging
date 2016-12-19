@@ -37,7 +37,7 @@ public class Gui extends JFrame  {
 	
 	private JMenu file, info, space;
 	
-	private JMenuItem open, exit, information;
+	private JMenuItem open, save, exit, information;
 	
 	private BufferedImage origional;
 	
@@ -122,11 +122,13 @@ public class Gui extends JFrame  {
 		file = new JMenu("File");
 		info = new JMenu("Info");
 		
-		//creating new JMenu item EXIT
+		//creating new JMenu item OPEN
 		open = new JMenuItem();
-		open.setText("OPEN");
+		open.setText("Open");
 		
-		//open.addActionListener(this);
+		//creating new JMenu item SAVE
+		save = new JMenuItem();
+		save.setText("Save");
 		
 		//creating new JMenu item EXIT
 		exit = new JMenuItem();
@@ -136,10 +138,12 @@ public class Gui extends JFrame  {
 		information = new JMenuItem();
 		information.setText("Info");
 		
-		//information.addActionListener(this);
-		
 		//adding JMenu items to file
 		file.add(open);
+		
+		file.addSeparator();
+		
+		file.add(save);
 		
 		file.addSeparator();
 		
@@ -175,8 +179,12 @@ public class Gui extends JFrame  {
 	}
 
 	void menuListener(ActionListener press){
-		exit.addActionListener(press);
+		//first menu
 		open.addActionListener(press);
+		save.addActionListener(press);
+		exit.addActionListener(press);
+
+		//first second menu
 		information.addActionListener(press);
 	}
 	
@@ -186,13 +194,17 @@ public class Gui extends JFrame  {
 		reset.addActionListener(press);
 	}
 	
-	//retrun menu items
-	public JMenuItem returnExit(){
-		return this.exit;
-	}
-
+	//return menu items
 	public JMenuItem returnOpen() {
 		return this.open;
+	}
+	
+	public JMenuItem returnSave() {
+		return this.save;
+	}
+	
+	public JMenuItem returnExit(){
+		return this.exit;
 	}
 
 	public JMenuItem returnInformation() {
@@ -212,11 +224,15 @@ public class Gui extends JFrame  {
 		return this.reset;
 	}
 
+	public void updatePicture(BufferedImage updated) {
+		pic.setIcon(new ImageIcon(updated));
+	}
+	
 	public void setPicture(BufferedImage returnPicture) {
-		this.origional = returnPicture;
+		origional = returnPicture;
 		
 		pic = new JLabel();
-		pic.setIcon(new ImageIcon(returnPicture));
+		pic.setIcon(new ImageIcon(origional));
 		
 		middle.removeAll();
 		middle.add(pic);
@@ -229,20 +245,13 @@ public class Gui extends JFrame  {
 	}
 	
 	public void resetPicture(){
-		pic = new JLabel();
-		pic.setIcon(new ImageIcon(this.origional));
-		
-		this.remove(middle);
-		middle.removeAll();
-		middle.add(pic);
-		
-		this.add(middle);
-		this.pack();
+		pic.setIcon(new ImageIcon(origional));
 	}
 
 	private void center() {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dimension.width/2 - this.getWidth()/2 , dimension.height/2 - this.getHeight()/2);
+		this.setLocation(dimension.width / 2 - this.getWidth() / 2,
+				dimension.height / 2 - this.getHeight() / 2);
 	}
 
 	private void enbableButtons() {
