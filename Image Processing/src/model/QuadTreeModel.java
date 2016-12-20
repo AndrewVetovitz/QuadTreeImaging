@@ -6,7 +6,7 @@ import view.Gui;
 
 public class QuadTreeModel {
 	
-	private ProcessingData subDividedImage;
+	private ProcessingData processdata;
 	
 	private BufferedImage image;
 	
@@ -16,7 +16,7 @@ public class QuadTreeModel {
 	public boolean openPicture(Gui gui){
 		image = ImageInputOutput.readImage(gui);
 		if(image != null){
-			subDividedImage = new ProcessingData(image);
+			processdata = new ProcessingData(image);
 			return true;
 		}
 		return false;
@@ -31,24 +31,24 @@ public class QuadTreeModel {
 	}
 	
 	public void divideOnce() {
-		subDividedImage.subdivide();	
+		processdata.subdivide();	
 	}
 	
 
 	public void resetPicture() {
-		subDividedImage = new ProcessingData(image);
+		processdata = new ProcessingData(image);
 	}
 	
 	//getters
 	public BufferedImage getUpdatedPicture(){
-		return subDividedImage.getImage();
+		return processdata.getImage();
 	}
 	
 	public int getTotalDivisions(){
-		return subDividedImage.getTotalDivisions();
+		return processdata.getTotalDivisions();
 	}
 	
 	public int getTotalObjects(){
-		return subDividedImage.getTotalObjects();
+		return processdata.getTotalObjects();
 	}
 }

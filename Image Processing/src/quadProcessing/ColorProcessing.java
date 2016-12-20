@@ -61,6 +61,10 @@ public class ColorProcessing {
 			}
 		}
 		
+		
+		//getting totalPixels in the entire image
+		//TODO int totalPixels = data.getHeight() * data.getWidth();
+		
 		return difference;
 	}
 	

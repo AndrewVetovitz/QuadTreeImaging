@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -26,11 +28,13 @@ public class Gui extends JFrame  {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel middle, bottom;
+	private JPanel middle, bottom, options;
 	
 	private JLabel pic;
 	
 	private JButton start, stop, reset;
+	
+	private JButton skeleton;
 	
 	private JLabel divisions, objects;
 	
@@ -40,7 +44,7 @@ public class Gui extends JFrame  {
 	
 	private JMenuItem open, save, exit, information;
 	
-	private BufferedImage origional;
+	private BufferedImage origional, current;
 	
 	private int totalDivisions, totalObjects;
 	
@@ -86,6 +90,14 @@ public class Gui extends JFrame  {
 	private void createPanel() {
 		middle = new JPanel();
 		bottom = new JPanel();
+		options = new JPanel();
+		
+		options.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridwidth = GridBagConstraints.REMAINDER;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+
+		options.add(skeleton, gbc);
 		
 		bottom.add(start);
 		bottom.add(stop);
@@ -103,9 +115,12 @@ public class Gui extends JFrame  {
 		
 		bottom.setBackground(Color.WHITE);
 		middle.setBackground(Color.WHITE);
+		//TODO options.setBackground(Color.WHITE);
 	}
 
 	private void createButtons() {
+		skeleton = new JButton("Skeleton");
+		
 		start = new JButton("START");
 		start.setEnabled(false);
 		
@@ -184,7 +199,8 @@ public class Gui extends JFrame  {
 		
 		//panel layout
 		this.add(middle, BorderLayout.CENTER);
-		this.add(bottom, BorderLayout.SOUTH);
+		this.add(options, BorderLayout.LINE_END);
+		this.add(bottom, BorderLayout.PAGE_END);
 	}
 
 	public void menuListener(ActionListener press){
@@ -232,8 +248,13 @@ public class Gui extends JFrame  {
 	public JButton returnReset(){
 		return this.reset;
 	}
+	
+	public BufferedImage getCurrentPicture() {
+		return current;
+	}
 
 	public void updatePicture(BufferedImage updated) {
+		current = updated;
 		pic.setIcon(new ImageIcon(updated));
 	}
 	
@@ -247,6 +268,7 @@ public class Gui extends JFrame  {
 	
 	public void setPicture(BufferedImage returnPicture) {
 		origional = returnPicture;
+		current = returnPicture;
 		
 		pic = new JLabel();
 		pic.setIcon(new ImageIcon(origional));
@@ -263,6 +285,7 @@ public class Gui extends JFrame  {
 	
 	public void resetPicture(){
 		pic.setIcon(new ImageIcon(origional));
+		current = origional;
 		divisions.setText("Divisions: " + 0);
 		objects.setText("Objects: " + 0);
 	}

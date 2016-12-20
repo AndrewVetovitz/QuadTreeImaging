@@ -1,8 +1,4 @@
-/startProgram/
-/userInterface/
-/FileIO/
-/view/
-/controller/
-/model/
-/quadDataStructure/
 /quadProcessing/
+/FileIO/
+/controller/
+/quadDataStructure/

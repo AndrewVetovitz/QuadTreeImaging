@@ -44,7 +44,7 @@ public class QuadTreeController {
 					resume = false;
 				}
 			}else if(e.getSource() == gui.returnSave()){
-				qModel.savePicture(gui, qModel.getUpdatedPicture());
+				qModel.savePicture(gui, gui.getCurrentPicture());
 			} else if(e.getSource() == gui.returnInformation()){
 				try {
 					Desktop.getDesktop().browse(new URI("https://github.com/AndrewVetovitz/QuadTreeImaging"));
@@ -77,6 +77,7 @@ public class QuadTreeController {
 				qModel.resetPicture();
 				gui.resetPicture();
 				resume = false;
+		//		timer.start();
 			}
 		} 
 	 }
