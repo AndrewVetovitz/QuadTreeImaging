@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Quadrant class for getting data of quadrant points
- * @author andrew Vetovitz
+ * @author Andrew Vetovitz
  *
  */
 public class Quadrant {
