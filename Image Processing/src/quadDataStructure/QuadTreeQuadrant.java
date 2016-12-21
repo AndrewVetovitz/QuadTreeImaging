@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
  * @author Andrew Vetovitz
  *
  */
-public class Quadrant {
+public class QuadTreeQuadrant {
 
 	/*
 	 * Private variables used
@@ -59,7 +59,7 @@ public class Quadrant {
 	 * 
 	 * @param data Buffered Image to have Quadrant coordinates returned.
 	 */
-	Quadrant(BufferedImage data){
+	public QuadTreeQuadrant(BufferedImage data){
 		//create new point class of the 4 quadrants
 		this.quadrants = new Point[4];
 		
@@ -73,7 +73,7 @@ public class Quadrant {
 		}
 	}
 	
-	public Quadrant(QuadTreeNode data){
+	public QuadTreeQuadrant(QuadTreeNode data){
 		//create new point class of the 4 quadrants
 		this.quadrants = new Point[4];
 		
@@ -99,44 +99,69 @@ public class Quadrant {
 			case 0:{
 				newQuad.xLeft = 0;
 				newQuad.yLeft =  0;
-				newQuad.xRight = width - width / 2;
-				newQuad.yRight = height - height / 2;
+				newQuad.xRight = width / 2;
+				newQuad.yRight = height / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.xRight = width - width / 2;
+				//newQuad.yRight = height - height / 2;
 				
-				newQuad.Qwidth = width - width / 2;
-				newQuad.Qheight = height - height / 2;
+				newQuad.Qwidth = width / 2;
+				newQuad.Qheight = height / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.Qwidth = width - width / 2;
+				//newQuad.Qheight = height - height / 2;
 				
 				break;
 			}
 			case 1:{
-				newQuad.xLeft = width - width/2;
+				newQuad.xLeft = width / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.xLeft = width - width/2;
 				newQuad.yLeft = 0;
 				newQuad.xRight = width;
-				newQuad.yRight = height - height/2;
+				newQuad.yRight = height / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.yRight = height - height/2;
 
 				newQuad.Qwidth = width / 2;
-				newQuad.Qheight = height - height / 2;
+				newQuad.Qheight = height / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.Qwidth = width / 2;
+				//newQuad.Qheight = height - height / 2;
 				
 				break;
 			}
 			case 2:{
-				newQuad.xLeft = width - width / 2;
-				newQuad.yLeft = height - height / 2;
+				newQuad.xLeft = width / 2;
+				newQuad.yLeft = height / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.xLeft = width - width / 2;
+				//newQuad.yLeft = height - height / 2;
 				newQuad.xRight = width;
 				newQuad.yRight = height;
 				
 				newQuad.Qwidth = width / 2;
 				newQuad.Qheight = height / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.Qwidth = width / 2;
+				//newQuad.Qheight = height / 2;
 				
 				break;
 			}
 			case 3:{
 				newQuad.xLeft = 0;
-				newQuad.yLeft = height - height / 2;
-				newQuad.xRight = width - width / 2;
+				newQuad.yLeft = height / 2;
+				newQuad.xRight = width / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.yLeft = height - height / 2;
+				//newQuad.xRight = width - width / 2;
 				newQuad.yRight = height;
 				
-				newQuad.Qwidth = width - width / 2;
+				newQuad.Qwidth = width / 2;
 				newQuad.Qheight = height / 2;
+				//optional if size is not a perfect power of 2
+				//newQuad.Qwidth = width - width / 2;
+				//newQuad.Qheight = height / 2;
 				
 				break;
 			}

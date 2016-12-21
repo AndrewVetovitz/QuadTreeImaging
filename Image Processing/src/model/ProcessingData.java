@@ -7,7 +7,7 @@ import quadProcessing.SubDivideImage;
 
 public class ProcessingData {
 
-	private SubDivideImage divide;
+	private SubDivideImage subdivideImage;
 	
 	private QuadTreeGraphics graphics;
 	
@@ -15,15 +15,18 @@ public class ProcessingData {
 	
 	private QuadTreeNode[] data;
 	
-	public ProcessingData(BufferedImage image) {
-		divide = new SubDivideImage(image);
-		output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_BGR);
+	public ProcessingData() {
+	}
+	
+	public void setData(BufferedImage image){
+		subdivideImage = new SubDivideImage(image);
+		output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
 		graphics = new QuadTreeGraphics();
 	}
 	
 	public void subdivide(){
-		divide.oneDivision();
-		data = divide.returnImageData();
+		subdivideImage.oneDivision();
+		data = subdivideImage.returnImageData();
 		output = graphics.drawBufferedImage(data, output);
 	}
 
@@ -32,10 +35,10 @@ public class ProcessingData {
 	}
 
 	public int getTotalDivisions() {
-		return divide.returnTotalDivisions();
+		return subdivideImage.returnTotalDivisions();
 	}
 
-	public int getTotalObjects() {
-		return divide.returnTotalObjects();
+	public void setOptions(boolean returnSkeletonState) {
+		graphics.setOptionSkeleton(returnSkeletonState);
 	}
 }
