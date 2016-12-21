@@ -4,19 +4,23 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 
 import quadDataStructure.QuadTreeNode;
-import quadDataStructure.Quadrant;
+import quadDataStructure.QuadTreeQuadrant;
 
 public class SubDivideImage {
 
 	private QuadTreeNode[] newQuads;
 	
+	private ColorProcessing color;
+	
 	private int totalDivisions;
 	
-	private PriorityQueue<QuadTreeNode> toDivide = new PriorityQueue<>(Collections.reverseOrder());
+	private PriorityQueue<QuadTreeNode> toDivide;
 	
 	public SubDivideImage(BufferedImage image){
-		QuadTreeNode root = new QuadTreeNode(image, 0, 0, 10000);
+		color = new ColorProcessing();
+		QuadTreeNode root = new QuadTreeNode(image, 0, 0, color.computeColor(image));
 		totalDivisions = 0;
+		toDivide = new PriorityQueue<>(Collections.reverseOrder());
 		toDivide.add(root);
 	}
 	
@@ -28,24 +32,20 @@ public class SubDivideImage {
 			toDivide.add(newQuads[j]);
 		}
 		
-		while(toDivide.size() > 0 && (toDivide.peek().returnRoot().getWidth() < 2 || 
-				toDivide.peek().returnRoot().getHeight() < 2 || toDivide.peek().returnRMS() <= .1)){
+		while(toDivide.size() > 0 && (toDivide.peek().returnRoot().getWidth() < 4 || 
+				toDivide.peek().returnRoot().getHeight() < 4 || toDivide.peek().getRMS() <= .1)){
 			QuadTreeNode remove = toDivide.poll();
 			remove.setRMS(0);
 			toDivide.add(remove);
 		}
 	}
 
-	private QuadTreeNode[] subdivide(QuadTreeNode root){			
-		int tempOrgWX = root.returnX();
-		int tempOrgWY = root.returnY();
-		
+	private QuadTreeNode[] subdivide(QuadTreeNode root){
+		//will return a QuadTreeNode of 4 quadTree children per division
 		QuadTreeNode[] returnRoot = new QuadTreeNode[4];
 		
 		//creating new quadrant of the data
-		Quadrant quads = new Quadrant(root);
-		
-		ColorProcessing color = new ColorProcessing();
+		QuadTreeQuadrant quads = new QuadTreeQuadrant(root);
 			
 		//iterating through and setting all the roots to the new quadrants
 		for(int i = 0; i < 4; i++){
@@ -56,13 +56,12 @@ public class SubDivideImage {
 					quads.pointArrayOfQuadrants()[i].height());
 				
 			QuadTreeNode leaf = new QuadTreeNode(quad, 
-					quads.pointArrayOfQuadrants()[i].xLeft() + tempOrgWX,
-					quads.pointArrayOfQuadrants()[i].yLeft() + tempOrgWY,
-					color.RootMeanDifference(quad));
+					quads.pointArrayOfQuadrants()[i].xLeft() + root.returnX(),
+					quads.pointArrayOfQuadrants()[i].yLeft() + root.returnY(),
+					color.computeColor(quad));
 				
 			returnRoot[i] = leaf;
 		}
-			
 		return returnRoot;
 	}
 	
@@ -73,8 +72,4 @@ public class SubDivideImage {
 	public int returnTotalDivisions() {
 		return totalDivisions;
 	}
-
-	public int returnTotalObjects() {
-		return 1 + 3 * totalDivisions;
-	}	
 }

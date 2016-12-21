@@ -10,14 +10,22 @@ public class QuadTreeModel {
 	
 	private BufferedImage image;
 	
+	final int size = 1024;
+	
 	public QuadTreeModel(){
 	}
 	
 	public boolean openPicture(Gui gui){
-		image = ImageInputOutput.readImage(gui);
-		if(image != null){
-			processdata = new ProcessingData(image);
-			return true;
+		if(gui == null){
+			processdata = new ProcessingData();
+		}else{
+			image = ImageInputOutput.readImage(gui);
+			if(image != null){
+				processdata = new ProcessingData();
+				image = Resize.scaleImage(image, size);
+				processdata.setData(image);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -36,7 +44,8 @@ public class QuadTreeModel {
 	
 
 	public void resetPicture() {
-		processdata = new ProcessingData(image);
+		processdata = new ProcessingData();
+		processdata.setData(image);
 	}
 	
 	//getters
@@ -47,8 +56,8 @@ public class QuadTreeModel {
 	public int getTotalDivisions(){
 		return processdata.getTotalDivisions();
 	}
-	
-	public int getTotalObjects(){
-		return processdata.getTotalObjects();
+
+	public void setOptions(boolean returnSkeletonState) {
+		processdata.setOptions(returnSkeletonState);
 	}
 }

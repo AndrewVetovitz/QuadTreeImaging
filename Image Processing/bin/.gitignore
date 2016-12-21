@@ -1,4 +1,5 @@
 /quadProcessing/
-/FileIO/
-/controller/
 /quadDataStructure/
+/controller/
+/view/
+/model/

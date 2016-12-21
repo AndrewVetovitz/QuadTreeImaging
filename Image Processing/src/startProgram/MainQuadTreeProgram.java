@@ -16,7 +16,7 @@ public class MainQuadTreeProgram {
 		//new controller for model and gui
 		new QuadTreeController(gui, qModel);
 		
-		//make frame visible
+		//make frame visible after components have loaded
 		gui.setVisible(true);
 	}
 }
