@@ -36,7 +36,10 @@ public class QuadTreeGraphics {
 		return output;
 	}
 
-	public void setOptionSkeleton(boolean skeleton) {
-		this.skeleton = skeleton;
+	public void setOptionSkeleton(boolean[] states) {
+		for(int i = 0; i < states.length; i++){
+			//TODO fix this whole method
+		}
+		this.skeleton = false;
 	}
 }
