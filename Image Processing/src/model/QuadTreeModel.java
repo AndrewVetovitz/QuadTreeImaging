@@ -18,6 +18,7 @@ public class QuadTreeModel {
 	public boolean openPicture(Gui gui){
 		if(gui == null){
 			processdata = new ProcessingData();
+			image = null;
 		}else{
 			image = ImageInputOutput.readImage(gui);
 			if(image != null){
@@ -57,7 +58,7 @@ public class QuadTreeModel {
 		return processdata.getTotalDivisions();
 	}
 
-	public void setOptions(boolean returnSkeletonState) {
-		processdata.setOptions(returnSkeletonState);
+	public void setOptions(boolean[] bs) {
+		processdata.setOptions(bs);
 	}
 }

@@ -6,12 +6,10 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -22,6 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import view.CreateMenu;
+import view.CreateButtons;
 
 public class Gui extends JFrame  {
 
@@ -36,11 +35,11 @@ public class Gui extends JFrame  {
 	
 	private JLabel pic;
 	
-	private JButton start, stop, reset;
-	
 	private JLabel divisions, objects;
 	
 	private CreateMenu createMenu;
+	
+	private CreateButtons createButtons;
 	
 	private JMenuBar menuBar;
 	
@@ -51,7 +50,7 @@ public class Gui extends JFrame  {
 	public Gui(){
 		setUIManager();
 		
-		this.setName("Quad");
+		this.setTitle("Quads Image Processing");
 		
 		Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Andrew\\Desktop\\CSE\\Image Processing Project\\Images\\square.jpg");
 		
@@ -61,11 +60,11 @@ public class Gui extends JFrame  {
 		
 		center();
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		buildButtons();
 	
 		buildMenu();
-		
-		createButtons();
 		
 		createPanel();
 		
@@ -97,7 +96,6 @@ public class Gui extends JFrame  {
 		right = new JPanel();
 		middle = new JPanel();
 		bottom = new JPanel();
-		buttonsBottom = new JPanel();
 		infoBottom = new JPanel();
 		
 		//vertical scroll pane
@@ -105,10 +103,6 @@ public class Gui extends JFrame  {
 		middleScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		middleScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		middleScroll.getVerticalScrollBar().setUnitIncrement(15);
-		
-		buttonsBottom.add(start);
-		buttonsBottom.add(stop);
-		buttonsBottom.add(reset);
 		
 		totalDivisions = 0;
 		divisions = new JLabel("Divisions: " + totalDivisions);
@@ -130,17 +124,6 @@ public class Gui extends JFrame  {
 		middleScroll.setBorder(BorderFactory.createEmptyBorder());
 	}
 
-	private void createButtons() {
-		start = new JButton("START");
-		start.setEnabled(false);
-		
-		stop = new JButton("STOP");
-		stop.setEnabled(false);
-		
-		reset = new JButton("RESET");
-		reset.setEnabled(false);
-	}
-
 	private void buildMenu() {	
 		//creating new menu bar item
 		menuBar = new JMenuBar();
@@ -152,8 +135,18 @@ public class Gui extends JFrame  {
 		this.setJMenuBar(menuBar);
 	}
 	
-	public CreateMenu getCreateMenu(){
+	private void buildButtons(){
+		buttonsBottom = new JPanel();
+		
+		createButtons = new CreateButtons(buttonsBottom);
+	}
+	
+	public final CreateMenu getCreateMenu(){
 		return this.createMenu;
+	}
+	
+	public CreateButtons getCreateButtons() {
+		return this.createButtons;
 	}
 	
 	private void frameLayout() {
@@ -163,7 +156,7 @@ public class Gui extends JFrame  {
 		//buttons layout
 		bottom.setLayout(new BorderLayout());
 		
-		buttonsBottom.setLayout(new FlowLayout(FlowLayout.CENTER));
+		buttonsBottom.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 10));
 		infoBottom.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		
 		bottom.add(buttonsBottom, BorderLayout.PAGE_START);
@@ -174,25 +167,6 @@ public class Gui extends JFrame  {
 		this.add(right, BorderLayout.LINE_END);
 		this.add(middleScroll, BorderLayout.CENTER);
 		this.add(bottom, BorderLayout.PAGE_END);
-	}
-	
-	public void ButtonListener(ActionListener press){
-		start.addActionListener(press);
-		stop.addActionListener(press);
-		reset.addActionListener(press);
-	}
-	
-	//return button items
-	public JButton returnStart(){
-		return this.start;
-	}
-	
-	public JButton returnStop(){
-		return this.stop;
-	}
-	
-	public JButton returnReset(){
-		return this.reset;
 	}
 
 	//get picture stuff
@@ -218,7 +192,7 @@ public class Gui extends JFrame  {
 			middle.removeAll();
 			updateDivisions(0);
 			updateObjects(0);
-			disableButtons();
+			createButtons.disableButtons();
 		}else{
 			origional = returnPicture;
 			current = returnPicture;
@@ -231,7 +205,7 @@ public class Gui extends JFrame  {
 			
 			this.pack();
 			
-			enbableButtons();
+			createButtons.enbableButtons();
 			
 			center();
 		}
@@ -249,21 +223,14 @@ public class Gui extends JFrame  {
 		this.setMaximumSize(dimension);
 		this.setLocation(dimension.width / 2 - this.getWidth() / 2,
 				dimension.height / 2 - this.getHeight() / 2);
+		//make sure JFrame does not go above the screen upon resizing
 		if(this.getLocation().getY() < 0){
 			this.setLocation(dimension.width / 2 - this.getWidth() / 2, 
 					dimension.height / 2 - this.getHeight() / 2 - (int)this.getLocation().getY());
 		}
 	}
 
-	private void enbableButtons() {
-		start.setEnabled(true);
-		stop.setEnabled(true);
-		reset.setEnabled(true);
-	}
-	
-	private void disableButtons(){
-		start.setEnabled(false);
-		stop.setEnabled(false);
-		reset.setEnabled(false);
+	public void CreateHelp() {
+		new HelpGui(this, createMenu);
 	}
 }

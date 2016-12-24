@@ -38,7 +38,7 @@ public class ProcessingData {
 		return subdivideImage.returnTotalDivisions();
 	}
 
-	public void setOptions(boolean returnSkeletonState) {
-		graphics.setOptionSkeleton(returnSkeletonState);
+	public void setOptions(boolean[] bs) {
+		graphics.setOptionSkeleton(bs);
 	}
 }
