@@ -19,11 +19,15 @@ Below are some samples of this project that were creates.
 
 ![text](http://i.imgur.com/gL5rbNb.png, "Apple QuadTree made with triangles")
 
+
 ![text](http://i.imgur.com/yIHrweL.png, "New York square made with squares and skeleton frame")
 
-![text]http://i.imgur.com/SURBJY9.png, "Stary Night made with squares and skeleton frame")
+
+![text](http://i.imgur.com/SURBJY9.png, "Stary Night made with squares and skeleton frame")
+
 
 ![text](http://i.imgur.com/uAaeL8O.png, "World map made with circles")
+
 
 ![text](http://i.imgur.com/7XjNu91.png, "Flowers QuadTree made with circles")
 
