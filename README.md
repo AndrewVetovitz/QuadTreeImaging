@@ -17,5 +17,5 @@ Using statistics by taking the weighted average can allow for quick and efficent
 
 Below are some samples of this project that were creates.
 
-![text](http://imgur.com/gL5rbNb)
+![text](http://imgur.com/gL5rbNb, "Apple QuadTrees made with triangles")
 
