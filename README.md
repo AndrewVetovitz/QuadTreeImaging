@@ -13,7 +13,7 @@ Enjoy the read and if you have any reccomendations or bug finds please post or a
 
 
 
-The most valuable takeways I have and give to growing developers are as follows.
+The most valuable takeways I have and give to growing developers are as follows:
 ## Do not undererestimate the size of your project overall 
 I origionally expected this project to be 5-6 classes in total and ended up being about 20 with ~400-500 lines of code total.
 ## Bugs are unexpected 
