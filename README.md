@@ -1,4 +1,4 @@
-Quad Tree Image Processing:
+# Quad Tree Image Processing:
 
 This project was my first indepth working with QuadTree data structure. For this project I used quadtrees and color processing to subdivide an image in order to create graphic art. The results went better than expected and everything can be seen in the executable jar file. The QuadTree data structure utilizes breaking an image into four quadrants repeatedly based on some form of error or measurment. In my case I used average color differences, as I will talk further below, in order to subdivide an image and refine its higher detail sections into smaller and smaller parts (correclating to more subdivisions of that one area).
 
