@@ -4,6 +4,11 @@ import controller.QuadTreeController;
 import model.QuadTreeModel;
 import view.Gui;
 
+/**
+ * QuadTree Image Processing Project main class
+ * @author Andrew
+ *
+ */
 public class MainQuadTreeProgram {
 	
 	public static void main(String[] args){

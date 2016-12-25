@@ -23,20 +23,18 @@ public class HelpGui {
 	private final String helpText = "<br>" 
 			+ pL + "To use the program upload any image from file." + pR + "<br>"
 			+ pL + "Begin by setting your settings." + pR + "<br>"
-			+ pL + "Settings:" + pR
-			+ pL + "Skeleton: Use this to create a wire frame around each image division." + pR
+			+ pL + "<u>Settings</u>:" + pR
+			+ pL + "<u>Skeleton</u>: Use this to create a wire frame around each image division." + pR
 			+ "<br>"
-			+ pL + "Objects: " + pR
-			+ pL + "Square: Division objects will be of type square." + pR 
-			+ pL + "Circle: Division objects will be of type circle." + pR
-			+ pL + "Triangle: Division objects will be of type triangle." + pR
-			+ pL + "Random: Division objects will be of type random." + pR
+			+ pL + "<u>Objects</u>: " + pR
+			+ pL + "<u>Square</u>: Division objects will be of type square." + pR 
+			+ pL + "<u>Circle</u>: Division objects will be of type circle." + pR
+			+ pL + "<u>Triangle</u>: Division objects will be of type triangle." + pR
+			+ pL + "You can choose the direction of the triangle direction to be left, right, up, down." + pR
 			+ "<br>"
-			+ pL + "You can use type random or combine different object types create mix patterns." + pL
-			+ "<br>"
-			+ pL + "BackGround:" + pR
-			+ pL + "Black BackGround: Set the background color behind the image to be black." + pR
-			+ pL + "White BackGround: Set the background color behind the image to be white." + pR
+			+ pL + "<u>BackGround</u>:" + pR
+			+ pL + "<u>Black BackGround</u>: Set the background color behind the image to be black." + pR
+			+ pL + "<u>White BackGround</u>: Set the background color behind the image to be white." + pR
 			+ "<br>"
 			+ pL + "Refer to the git page under info to see example and read about the Algorithms behind this project." + pR
 			+ "<br>";

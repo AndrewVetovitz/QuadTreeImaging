@@ -2,14 +2,14 @@ package model;
 import java.awt.image.BufferedImage;
 
 import quadDataStructure.QuadTreeNode;
-import quadProcessing.QuadTreeGraphics;
+import quadProcessing.QuadTreePrinting;
 import quadProcessing.SubDivideImage;
 
 public class ProcessingData {
 
 	private SubDivideImage subdivideImage;
 	
-	private QuadTreeGraphics graphics;
+	private QuadTreePrinting printing;
 	
 	private BufferedImage output;
 	
@@ -21,13 +21,17 @@ public class ProcessingData {
 	public void setData(BufferedImage image){
 		subdivideImage = new SubDivideImage(image);
 		output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
-		graphics = new QuadTreeGraphics();
+		printing = new QuadTreePrinting();
 	}
 	
-	public void subdivide(){
-		subdivideImage.oneDivision();
-		data = subdivideImage.returnImageData();
-		output = graphics.drawBufferedImage(data, output);
+	public boolean subdivide(){
+		if(subdivideImage.oneDivision()){
+			data = subdivideImage.returnImageData();
+			output = printing.drawBufferedImage(data, output);
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public BufferedImage getImage() {	
@@ -38,7 +42,7 @@ public class ProcessingData {
 		return subdivideImage.returnTotalDivisions();
 	}
 
-	public void setOptions(boolean[] bs) {
-		graphics.setOptionSkeleton(bs);
+	public void setOptions(boolean[] options) {
+		printing.setOptions(options);
 	}
 }

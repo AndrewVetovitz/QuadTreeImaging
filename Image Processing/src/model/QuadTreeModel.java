@@ -11,6 +11,8 @@ public class QuadTreeModel {
 	private BufferedImage image;
 	
 	final int size = 1024;
+
+	private boolean[] options;
 	
 	public QuadTreeModel(){
 	}
@@ -39,14 +41,15 @@ public class QuadTreeModel {
 		return image;
 	}
 	
-	public void divideOnce() {
-		processdata.subdivide();	
+	public boolean divideOnce() {
+		return processdata.subdivide();	
 	}
 	
 
 	public void resetPicture() {
 		processdata = new ProcessingData();
 		processdata.setData(image);
+		processdata.setOptions(this.options);
 	}
 	
 	//getters
@@ -58,7 +61,8 @@ public class QuadTreeModel {
 		return processdata.getTotalDivisions();
 	}
 
-	public void setOptions(boolean[] bs) {
-		processdata.setOptions(bs);
+	public void setOptions(boolean[] options) {
+		this.options = options;
+		processdata.setOptions(this.options);
 	}
 }

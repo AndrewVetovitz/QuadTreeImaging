@@ -1,7 +1,5 @@
-/FileIO/
-/controller/
-/model/
-/quadDataStructure/
-/quadProcessing/
-/startProgram/
 /view/
+/controller/
+/quadProcessing/
+/model/
+/FileIO/
