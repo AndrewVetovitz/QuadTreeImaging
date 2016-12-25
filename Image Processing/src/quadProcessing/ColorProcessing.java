@@ -58,8 +58,8 @@ public class ColorProcessing {
 			}
 		}
 		
-		int totalRed = 0, totalGreen = 0, totalBlue = 0;
-		int countRed = 0, countGreen = 0, countBlue = 0;
+		double totalRed = 0, totalGreen = 0, totalBlue = 0;
+		double countRed = 0, countGreen = 0, countBlue = 0;
 		
 		for(int i = 0; i < 256; i++){
 			totalRed += red[i];
@@ -94,7 +94,8 @@ public class ColorProcessing {
 		blueError = Math.sqrt(blueError / totalBlue);
 		
 		double error = redError * .2126 + greenError * .7152 + blueError * .0722;
-		//double error = redError * .299 + greenError * .587 + blueError * .114
+		//Other formula that does not work as well
+		//double error = redError * .299 + greenError * .587 + blueError * .114;
 		
 		//setting values
 		colorAndError[0] = countRed;

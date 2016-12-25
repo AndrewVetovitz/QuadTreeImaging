@@ -1,5 +1,6 @@
 package FileIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -22,7 +23,10 @@ public class ImageInputOutput {
 		//creating variables to be used
 		BufferedImage img = null;
 		
-		JFileChooser reader = new JFileChooser();
+		JFileChooser reader = new JFileChooser("C:\\Users\\Andrew\\Desktop");
+		
+		reader.setFileFilter(new PictureFilter());
+		
 		int value = reader.showOpenDialog(gui);
 		if(value == JFileChooser.APPROVE_OPTION){
 			//try to read input file
@@ -44,12 +48,26 @@ public class ImageInputOutput {
 	 * @throws IOException if Image cannot be written to file
 	 */
 	public static void writeImage(Gui gui, BufferedImage picture) {
-		JFileChooser reader = new JFileChooser();
+		JFileChooser reader = new JFileChooser("C:\\Users\\Andrew\\Desktop");
+		reader.setFileFilter(new PictureFilter());
+		
 		int value = reader.showSaveDialog(gui);
 		if(value == JFileChooser.APPROVE_OPTION){
+			//getting the output file
+			File file = reader.getSelectedFile();
 			//writing program to file
+			if(!file.toString().endsWith(".png") && !file.toString().endsWith(".jpg") 
+					&& !file.toString().endsWith(".raw") && !file.toString().endsWith(".gif")
+					&& !file.toString().endsWith(".jpeg") && !file.toString().endsWith(".bmp")){
+				file = 	new File(file.toString() + ".png");
+			}
+			
+			String extension = file.toString().substring(file.toString().indexOf(".") + 1);
+			
 			try {
-				ImageIO.write(picture, "jpg", reader.getSelectedFile());
+				if(!ImageIO.write(picture, extension.toUpperCase(), file)){
+					throw new RuntimeException("Cannot write extension");
+				}
 			} catch (IOException e) {
 				System.err.println("Image cannot be written to file");
 				e.printStackTrace();

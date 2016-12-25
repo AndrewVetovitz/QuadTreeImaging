@@ -24,20 +24,23 @@ public class SubDivideImage {
 		toDivide.add(root);
 	}
 	
-	public void oneDivision() {
+	public boolean oneDivision() {
 		totalDivisions++;
 		QuadTreeNode root = toDivide.poll();
 		newQuads = subdivide(root);
+
 		for(int j = 0; j < newQuads.length; j++){
 			toDivide.add(newQuads[j]);
 		}
 		
-		while(toDivide.size() > 0 && (toDivide.peek().returnRoot().getWidth() < 4 || 
-				toDivide.peek().returnRoot().getHeight() < 4 || toDivide.peek().getRMS() <= .1)){
-			QuadTreeNode remove = toDivide.poll();
-			remove.setRMS(0);
-			toDivide.add(remove);
+		//making sure the divisions amount does not become too small, dividing a uniform image
+		while(toDivide.size() > 0 && (toDivide.peek().returnRoot().getWidth() < 2 || 
+				toDivide.peek().returnRoot().getHeight() < 2 || toDivide.peek().getRMS() <= .5)){
+			System.out.println(toDivide.peek());
+			toDivide.poll();
 		}
+		
+		return toDivide.size() > 0;
 	}
 
 	private QuadTreeNode[] subdivide(QuadTreeNode root){

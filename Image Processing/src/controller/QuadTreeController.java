@@ -51,6 +51,8 @@ public class QuadTreeController {
 	
 	private boolean started = false;
 	
+	private boolean permanetStop = false;
+	
 	public QuadTreeController(Gui gui, QuadTreeModel qModel){
 		 this.gui = gui;
 		 this.createMenu = gui.getCreateMenu();
@@ -101,6 +103,9 @@ public class QuadTreeController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == createMenu.getNewPage()){
+				if(timer.isRunning()){
+					timer.stop();
+				}
 				gui.setPicture(null);
 				quadTreeModel.openPicture(null);
 				createMenu.setOptionsEnabled(false);
@@ -109,6 +114,7 @@ public class QuadTreeController {
 				keyNew.setEnabled(false);
 				keySave.setEnabled(false);
 				createMenu.openJFileMenu();
+				permanetStop = false;
 			}else if(e.getSource() == createMenu.getOpen()){
 				if(quadTreeModel.openPicture(gui)){
 					gui.setPicture(quadTreeModel.returnPicture());
@@ -122,6 +128,7 @@ public class QuadTreeController {
 					createMenu.setSaveEnabled(true);
 					keyNew.setEnabled(true);
 					keySave.setEnabled(true);
+					permanetStop = false;
 				}
 			}else if(e.getSource() == createMenu.getSave()){
 				quadTreeModel.savePicture(gui, gui.getCurrentPicture());
@@ -136,36 +143,94 @@ public class QuadTreeController {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == createMenu.getSkeleton()){
 					createMenu.setSkeletonState(!createMenu.getSkeletonState());
+					createMenu.openJOptionsMenu();
 				} else if(e.getSource() == createMenu.getSquare()){
-					if(createMenu.getCircleState() == true ||	
-							createMenu.getTriangleState() == true || 
-							createMenu.getRandomState() == true){
-						createMenu.setSquareState(!createMenu.getSquareState());
+					createMenu.setCircleState(false);
+					createMenu.setTriangleState(false);
+					createMenu.setLeftTriangleState(false);
+					createMenu.setRightTriangleState(false);
+					createMenu.setUpTriangleState(false);
+					createMenu.setDownTriangleState(false);
+					if(!createMenu.getSquareState()){
+						createMenu.setSquareState(true);
 					}
+					createMenu.openJOptionsMenu();
 				}else if(e.getSource() == createMenu.getCircle()){
-					if(createMenu.getSquareState() == false &&
-							createMenu.getTriangleState() == false && 
-							createMenu.getRandomState() == false){
-						createMenu.setSquareState(true);
-					}
+					createMenu.setSquareState(false);
+					createMenu.setTriangleState(false);
+					createMenu.setLeftTriangleState(false);
+					createMenu.setRightTriangleState(false);
+					createMenu.setUpTriangleState(false);
+					createMenu.setDownTriangleState(false);
 					createMenu.setCircleState(!createMenu.getCircleState());
-				}else if(e.getSource() == createMenu.getTriangle()){
-					if(createMenu.getSquareState() == false &&
-							createMenu.getCircleState() == false && 
-							createMenu.getRandomState() == false){
+					if(!createMenu.getCircleState()){
 						createMenu.setSquareState(true);
 					}
-					createMenu.setTriangleState(!createMenu.getTriangleState());
-				}else if(e.getSource() == createMenu.getRandom()){
-					if(createMenu.getSquareState() == false &&
-							createMenu.getCircleState() == false && 
-							createMenu.getTriangleState() == false){
+					createMenu.openJOptionsMenu();
+				}else if(e.getSource() == createMenu.getLeftTriangle()){
+					createMenu.setSquareState(false);
+					createMenu.setCircleState(false);
+					createMenu.setRightTriangleState(false);
+					createMenu.setUpTriangleState(false);
+					createMenu.setDownTriangleState(false);
+					createMenu.setLeftTriangleState(!createMenu.getLeftTriangleState());
+					if(!createMenu.getLeftTriangleState()){
 						createMenu.setSquareState(true);
+						createMenu.setTriangleState(false);
+					}else{
+						createMenu.setTriangleState(true);
 					}
-					createMenu.setRandomState(!createMenu.getRandomState());
+					createMenu.openJOptionsMenu();
+					createMenu.openJOptionsTriangleMenu();
+				}else if(e.getSource() == createMenu.getRightTriangle()){
+					createMenu.setSquareState(false);
+					createMenu.setCircleState(false);
+					createMenu.setLeftTriangleState(false);
+					createMenu.setUpTriangleState(false);
+					createMenu.setDownTriangleState(false);
+					createMenu.setRightTriangleState(!createMenu.getRightTriangleState());
+					if(!createMenu.getRightTriangleState()){
+						createMenu.setSquareState(true);
+						createMenu.setTriangleState(false);
+					}else{
+						createMenu.setTriangleState(true);
+					}
+					createMenu.openJOptionsMenu();
+					createMenu.openJOptionsTriangleMenu();
+				}else if(e.getSource() == createMenu.getUpTriangle()){
+					createMenu.setSquareState(false);
+					createMenu.setCircleState(false);
+					createMenu.setLeftTriangleState(false);
+					createMenu.setRightTriangleState(false);
+					createMenu.setDownTriangleState(false);
+					createMenu.setUpTriangleState(!createMenu.getUpTriangleState());
+					if(!createMenu.getUpTriangleState()){
+						createMenu.setSquareState(true);
+						createMenu.setTriangleState(false);
+					}else{
+						createMenu.setTriangleState(true);
+					}
+					createMenu.openJOptionsMenu();
+					createMenu.openJOptionsTriangleMenu();
+				}else if(e.getSource() == createMenu.getDownTriangle()){
+					createMenu.setSquareState(false);
+					createMenu.setCircleState(false);
+					createMenu.setLeftTriangleState(false);
+					createMenu.setRightTriangleState(false);
+					createMenu.setUpTriangleState(false);
+					createMenu.setDownTriangleState(!createMenu.getDownTriangleState());;
+					if(!createMenu.getDownTriangleState()){
+						createMenu.setSquareState(true);
+						createMenu.setTriangleState(false);
+					}else{
+						createMenu.setTriangleState(true);
+					}
+					createMenu.openJOptionsMenu();
+					createMenu.openJOptionsTriangleMenu();
 				}else if(e.getSource() == createMenu.getBlack()){
 					createMenu.setBlackState(true);
 					createMenu.setWhiteState(false);
+					createMenu.openJOptionsMenu();
 				}else if(e.getSource() == createMenu.getWhite()){
 					createMenu.setWhiteState(!createMenu.getWhiteState());
 					if(createMenu.getWhiteState()){
@@ -173,8 +238,8 @@ public class QuadTreeController {
 					}else{
 						createMenu.setBlackState(true);
 					}
+					createMenu.openJOptionsMenu();
 				}
-				createMenu.openJOptionsMenu();
 			}
 		 }
 	 
@@ -201,15 +266,17 @@ public class QuadTreeController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == createButtons.returnStart()){
-				if(!resume){
-					quadTreeModel.setOptions(createMenu.getOptions());
-					resume = true;
-					started = true;
-					createMenu.setOptionsEnabled(false);
-					timer = new Timer(1000/FPS, updateFrame);
-					timer.start();
-				} else{
-					timer.start();
+				if(!permanetStop){
+					if(!resume){
+						quadTreeModel.setOptions(createMenu.getOptions());
+						resume = true;
+						started = true;
+						createMenu.setOptionsEnabled(false);
+						timer = new Timer(1000/FPS, updateFrame);
+						timer.start();
+					} else{
+						timer.start();
+					}
 				}
 			} else if(e.getSource() == createButtons.returnStop()){
 				timer.stop();
@@ -224,9 +291,10 @@ public class QuadTreeController {
 				}else{
 					quadTreeModel.resetPicture();
 					gui.resetPicture();
+					createMenu.setOptionsEnabled(true);
 					resume = false;
+					permanetStop = false;
 				}
-				createMenu.setOptionsEnabled(true);
 			}
 		} 
 	 }
@@ -315,11 +383,15 @@ public class QuadTreeController {
 	 
 	ActionListener updateFrame = new ActionListener() {
 	     public void actionPerformed(ActionEvent e) {
-    	  	quadTreeModel.divideOnce();
-			gui.updatePicture(quadTreeModel.getUpdatedPicture());
-			totalDivisions = quadTreeModel.getTotalDivisions();
-			gui.updateDivisions(totalDivisions);
-			gui.updateObjects(1 + totalDivisions * 3);
+    	  	if(quadTreeModel.divideOnce()){
+    	  		gui.updatePicture(quadTreeModel.getUpdatedPicture());
+    			totalDivisions = quadTreeModel.getTotalDivisions();
+    			gui.updateDivisions(totalDivisions);
+    			gui.updateObjects(1 + totalDivisions * 3);
+    	  	}else{
+    	  		timer.stop();
+    	  		permanetStop = true;
+    	  	}
 	     }
 	  };
 }

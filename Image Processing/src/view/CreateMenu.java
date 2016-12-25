@@ -22,8 +22,10 @@ public class CreateMenu {
 	
 	private JMenuItem newPage, open, save, exit;
 	
-	private JMenuItem skeleton, square, circle, triangle, random, black, white;
-	private boolean skeletonState, squareState, circleState, triangleState, randomState, blackState, whiteState;
+	private JMenu triangle;
+	private JMenuItem skeleton, square, circle, black, white, leftTriangle, rightTriangle, upTriangle, downTriangle;
+	private boolean skeletonState, squareState, circleState, triangleState, triangleStateUp,
+	triangleStateDown, triangleStateLeft, triangleStateRight, blackState, whiteState;
 	
 	private JMenuItem information, howToUse;
 	
@@ -129,20 +131,20 @@ public class CreateMenu {
 	}
 	
 	private void createOptionsItems(JMenu options) {
-		//creating new JMneuu item SKELETON
+		//creating new JMenu item SKELETON
 		skeleton = new JMenuItem("Skeleton");
 		
-		//creating new JMneuu item SQUARE
+		//creating new JMenu item SQUARE
 		square = new JMenuItem("Square");
 		
-		//creating new JMneuu item CIRCLE
+		//creating new JMenu item CIRCLE
 		circle = new JMenuItem("Circle");
 		
-		//creating new JMneuu item TRIANGLE
-		triangle = new JMenuItem("Triangle");
+		//creating new JMenu item TRIANGLE
+		triangle = new JMenu("Triangle");
 		
-		//creating new JMneu item RANDOM
-		random = new JMenuItem("Random");
+		//creating triangle menu
+		createTriangleMenu(triangle);
 		
 		//creating new JMenu item BLACK BACKGROUND
 		black = new JMenuItem("Black BackGround");
@@ -161,8 +163,6 @@ public class CreateMenu {
 		
 		options.add(triangle);
 		
-		options.add(random);
-		
 		options.addSeparator();
 		
 		options.add(black);
@@ -174,6 +174,18 @@ public class CreateMenu {
 		setOptionsEnabled(false);
 	}
 	
+	private void createTriangleMenu(JMenu triangle) {
+		leftTriangle = new JMenuItem("Left");
+		rightTriangle = new JMenuItem("Right");
+		upTriangle = new JMenuItem("Up");
+		downTriangle = new JMenuItem("Down");
+		
+		triangle.add(leftTriangle);
+		triangle.add(rightTriangle);
+		triangle.add(upTriangle);
+		triangle.add(downTriangle);
+	}
+
 	private void createInformationItems(JMenu info) {
 		//creating new JMenu item INFO
 		information = new JMenuItem("Info");
@@ -199,12 +211,19 @@ public class CreateMenu {
 		options.doClick();
 	}
 	
+	public void openJOptionsTriangleMenu() {
+		triangle.doClick();
+	}
+	
 	private final void setInitialOptions() {
 		setSkeletonState(false);
 		setSquareState(true);
 		setCircleState(false);
 		setTriangleState(false);
-		setRandomState(false);
+		setLeftTriangleState(false);
+		setRightTriangleState(false);
+		setUpTriangleState(false);
+		setDownTriangleState(false);
 		setBlackState(true);
 		setWhiteState(false);
 	}
@@ -232,7 +251,10 @@ public class CreateMenu {
 		square.addActionListener(press);
 		circle.addActionListener(press);
 		triangle.addActionListener(press);
-		random.addActionListener(press);
+		leftTriangle.addActionListener(press);
+		rightTriangle.addActionListener(press);
+		upTriangle.addActionListener(press);
+		downTriangle.addActionListener(press);
 		black.addActionListener(press);
 		white.addActionListener(press);
 	}
@@ -336,7 +358,7 @@ public class CreateMenu {
 	}
 	
 	//**TRIANGLE**//
-	public JMenuItem getTriangle(){
+	public JMenu getTriangle(){
 		return this.triangle;
 	}
 		
@@ -353,21 +375,71 @@ public class CreateMenu {
 		}
 	}
 	
-	//**RANDOM**//
-	public JMenuItem getRandom(){
-		return this.random;
+	public JMenuItem getLeftTriangle(){
+		return this.leftTriangle;
 	}
 		
-	public boolean getRandomState(){
-		return this.randomState;
+	public boolean getLeftTriangleState(){
+		return this.triangleStateLeft;
 	}
 	
-	public final void setRandomState(boolean state){
-		this.randomState = state;
+	public final void setLeftTriangleState(boolean state){
+		this.triangleStateLeft = state;
 		if(state){
-			this.random.setIcon(checkMarkIcon);
+			this.leftTriangle.setIcon(checkMarkIcon);
 		}else{
-			this.random.setIcon(null);
+			this.leftTriangle.setIcon(null);
+		}
+	}
+	
+	public JMenuItem getRightTriangle(){
+		return this.rightTriangle;
+	}
+		
+	public boolean getRightTriangleState(){
+		return this.triangleStateRight;
+	}
+	
+	public final void setRightTriangleState(boolean state){
+		this.triangleStateRight = state;
+		if(state){
+			this.rightTriangle.setIcon(checkMarkIcon);
+		}else{
+			this.rightTriangle.setIcon(null);
+		}
+	}
+	
+	public JMenuItem getUpTriangle(){
+		return this.upTriangle;
+	}
+		
+	public boolean getUpTriangleState(){
+		return this.triangleStateUp;
+	}
+	
+	public final void setUpTriangleState(boolean state){
+		this.triangleStateUp = state;
+		if(state){
+			this.upTriangle.setIcon(checkMarkIcon);
+		}else{
+			this.upTriangle.setIcon(null);
+		}
+	}
+	
+	public JMenuItem getDownTriangle(){
+		return this.downTriangle;
+	}
+		
+	public boolean getDownTriangleState(){
+		return this.triangleStateDown;
+	}
+	
+	public final void setDownTriangleState(boolean state){
+		this.triangleStateDown = state;
+		if(state){
+			this.downTriangle.setIcon(checkMarkIcon);
+		}else{
+			this.downTriangle.setIcon(null);
 		}
 	}
 	
@@ -412,15 +484,18 @@ public class CreateMenu {
 		this.square.setEnabled(state);
 		this.circle.setEnabled(state);
 		this.triangle.setEnabled(state);
-		this.random.setEnabled(state);
+		this.leftTriangle.setEnabled(state);
+		this.rightTriangle.setEnabled(state);
+		this.upTriangle.setEnabled(state);
+		this.downTriangle.setEnabled(state);
 		this.white.setEnabled(state);
 		this.black.setEnabled(state);
 	}
 
 	public boolean[] getOptions() {
 		boolean[] options = {this.skeletonState, this.squareState,
-				this.circleState, this.triangleState, this.randomState,
-				this.blackState, this.whiteState};
+				this.circleState, this.triangleStateLeft, this.triangleStateRight,
+				this.triangleStateUp, this.triangleStateDown, this.blackState};
 		return options;
 	}
 	

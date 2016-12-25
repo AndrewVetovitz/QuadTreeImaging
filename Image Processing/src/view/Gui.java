@@ -218,7 +218,7 @@ public class Gui extends JFrame  {
 		updateObjects(0);
 	}
 
-	private void center() {
+	private void center(){
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setMaximumSize(dimension);
 		this.setLocation(dimension.width / 2 - this.getWidth() / 2,
