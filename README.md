@@ -15,19 +15,19 @@ The logic can be much simpler than the backend, but require 2-3x as much wiring 
 Firstly you cannot just added and divide 2 colors by 2 to find the average you must square them, add them, divide by 2, then take the square root. Also for color processing look into L*A*B colors which eliminate light componenets of colors which allow them to correctly be added. 
 Using statistics by taking the weighted average can allow for quick and efficent erorr detection. This project uses the lumanace error method which is error = r * .2126 + g * .7152 + b * .0722. This formula is based on research and how the eye precieves color the best; green being the highest according to this formula. Otherwise calculating error between two color can create odd results. These errors can include the image being too dark overall or in my case subdividing low detail areas. If you want to use color in your future projects do your research before coding your project and look up materials. One of my life savers was this video by minute physics on  [colors](https://www.youtube.com/watch?v=LKnqECcg6Gw)
 
-Below are some samples of this project that were creates.
+## Below are some samples creates from this project:
 
+## Apple QuadTree made with triangles
 ![text](http://i.imgur.com/gL5rbNb.png, "Apple QuadTree made with triangles")
 
-
+## New York square made with squares and skeleton frame
 ![text](http://i.imgur.com/yIHrweL.png, "New York square made with squares and skeleton frame")
 
-
-![text](http://i.imgur.com/SURBJY9.png, "Stary Night made with squares and skeleton frame")
-
-
-![text](http://i.imgur.com/uAaeL8O.png, "World map made with circles")
-
-
+## Flowers QuadTree made with circles
 ![text](http://i.imgur.com/7XjNu91.png, "Flowers QuadTree made with circles")
 
+## Stary Night made with squares and skeleton frame
+![text](http://i.imgur.com/SURBJY9.png, "Stary Night made with squares and skeleton frame")
+
+## World map made with circles
+![text](http://i.imgur.com/uAaeL8O.png, "World map made with circles")
