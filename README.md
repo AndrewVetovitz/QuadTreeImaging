@@ -29,14 +29,14 @@ Using statistics by taking the weighted average can allow for quick and efficent
 ## Apple QuadTree made with triangles
 ![text](http://i.imgur.com/gL5rbNb.png, "Apple QuadTree made with triangles")
 
-## New York square made with squares and skeleton frame
+## New York Square QuadTree made with squares and skeleton frame
 ![text](http://i.imgur.com/yIHrweL.png, "New York square made with squares and skeleton frame")
 
 ## Flowers QuadTree made with circles
 ![text](http://i.imgur.com/7XjNu91.png, "Flowers QuadTree made with circles")
 
-## Stary Night made with squares and skeleton frame
+## Stary Night QuadTree made with squares and skeleton frame
 ![text](http://i.imgur.com/SURBJY9.png, "Stary Night made with squares and skeleton frame")
 
-## World map made with circles
+## World map QuadTree made with circles
 ![text](http://i.imgur.com/uAaeL8O.png, "World map made with circles")
